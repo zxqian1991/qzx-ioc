@@ -1,0 +1,26 @@
+{
+  "name": "qzx-ioc",
+  "version": "1.0.0",
+  "description": "the ios fun",
+  "main": "index.js",
+  "dependencies": {
+    "reflect-metadata": "^0.1.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zxqian1991/qzx-ioc.git"
+  },
+  "keywords": [
+    "ioc"
+  ],
+  "author": "qianzhixiang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zxqian1991/qzx-ioc/issues"
+  },
+  "homepage": "https://github.com/zxqian1991/qzx-ioc#readme"
+}

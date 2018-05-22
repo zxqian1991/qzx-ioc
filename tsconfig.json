@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "lib": [
+            "es2017"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmitHelpers": true,
+        "noImplicitThis": false,
+        "noUnusedLocals": false,
+        "removeComments": true,
+        "sourceMap": true,
+        "strict": false,
+        "target": "es5",
+        "declaration": false
+    },
+    "compileOnSave": false,
+    "buildOnSave": false
+}
