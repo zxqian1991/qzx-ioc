@@ -15,6 +15,9 @@ export function Ioc(injet: any) {
     return getIocInstance(injet);
 }
 function getIocInstance(inject: any) {
+    if(!targetLists.has(inject)) {
+        return inject;
+    }
     // 存在这个实例
     if(instanceLists.has(inject)) {
         return instanceLists.get(inject);
