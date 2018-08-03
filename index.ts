@@ -11,7 +11,7 @@ export function Injectable(_constructor: Function) {
     targetLists.set(_constructor, paramsTypes);
 }
 // 这个实例用来获取依赖注入的实例
-export function Ioc(injet: any) {
+export function Ioc<T>(injet: T): T {
     return getIocInstance(injet);
 }
 function getIocInstance(inject: any) {

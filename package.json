@@ -1,6 +1,6 @@
 {
   "name": "qzx-ioc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "the ios fun",
   "main": "index.js",
   "dependencies": {
