@@ -1,33 +1,27 @@
-import 'reflect-metadata';
-let targetLists: Map<any, any[]> = new Map();
-let instanceLists: Map<any, any> = new Map(); // 实例列表
-/**
- * 
- * @param _constructor 由于有webpack提前引入，所以能够保证所有的依赖都已经加载
- */
-export function Injectable(_constructor: Function) {
-    // 通过反射机制，获取参数类型列表    
-    let paramsTypes: Array<Function> = Reflect.getMetadata('design:paramtypes', _constructor);
-    targetLists.set(_constructor, paramsTypes);
-}
-// 这个实例用来获取依赖注入的实例
-export function Ioc<T>(injet: T): T {
-    return getIocInstance(injet);
-}
-function getIocInstance(inject: any) {
-    if(!targetLists.has(inject)) {
-        return inject;
+import "reflect-metadata";
+const FUNCTIONS = Symbol('functions');
+const INSTANCES = Symbol('instances');
+export function Injectable() {
+    return (target: any) => {
+        const paramsTypes = Reflect.getMetadata('design:paramtypes', target);
+        // 存储这个值
+        Reflect.defineMetadata(FUNCTIONS, paramsTypes, target)
     }
-    // 存在这个实例
-    if(instanceLists.has(inject)) {
-        return instanceLists.get(inject);
-    } else {
-        // 不存在
-        let relies = targetLists.get(inject) || [];
-        let instance = new inject(...relies.map((rely) => {
-            return getIocInstance(rely);
-        }));
-        instanceLists.set(inject, instance);
+}
+
+// 获取某个依赖
+export function Ioc<T>(target: any): T {
+    const instance = Reflect.getMetadata(INSTANCES, target);
+    if (instance) {
         return instance;
     }
+    // 获取这个target的依赖
+    const  paramsTypes: any[] = Reflect.getMetadata(FUNCTIONS, target) || [];
+    // 接下来就需要获取所有的依赖
+    const params = paramsTypes.map(rely => {
+        return Ioc(rely);
+    });
+    const tempInstance: T = new (target as any)(...params);
+    Reflect.defineMetadata(INSTANCES, tempInstance, target);
+    return tempInstance;
 }
