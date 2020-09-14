@@ -1,11 +1,14 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 export type IConstructor<T> = new (...args: any[]) => T;
-const FUNCTIONS = Symbol('functions');
-const INSTANCES = Symbol('instances');
-export function Injectable<T>() {
+const FUNCTIONS = Symbol("functions");
+const INSTANCES = Symbol("instances");
+
+var GLOBAL_HANDLER: Array<(v: any) => any> = [];
+export function Injectable<T>({ bootstrap }: { bootstrap?: false } = {}) {
   return (target: IConstructor<T>) => {
-    const paramsTypes = Reflect.getMetadata('design:paramtypes', target);
+    const paramsTypes = Reflect.getMetadata("design:paramtypes", target);
     Reflect.defineMetadata(FUNCTIONS, paramsTypes, target);
+    bootstrap && Ioc(target);
   };
 }
 
@@ -23,13 +26,22 @@ export function Ioc<T>(target: IConstructor<T>): T {
     return Ioc(rely);
   });
   const tempInstance: T = new (target as any)(...params);
-  Reflect.defineMetadata(INSTANCES, tempInstance, target);
+
+  Reflect.defineMetadata(
+    INSTANCES,
+    GLOBAL_HANDLER.reduce((v, h) => h(v), tempInstance),
+    target
+  );
   return tempInstance;
 }
 
 export function Iocable() {
   return (target: any, key: string) => {
-    const type = Reflect.getMetadata('design:type', target, key);
+    const type = Reflect.getMetadata("design:type", target, key);
     target[key] = Ioc(type);
   };
+}
+
+export function AddGlobalIocHandler(handler: (v: object) => object) {
+  GLOBAL_HANDLER.push(handler);
 }
