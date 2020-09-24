@@ -4,7 +4,9 @@ const FUNCTIONS = Symbol("functions");
 const INSTANCES = Symbol("instances");
 
 var GLOBAL_HANDLER: Array<(v: any) => any> = [];
-export function Injectable<T>({ bootstrap }: { bootstrap?: false } = {}) {
+export function Injectable<T>({
+  bootstrap = false,
+}: { bootstrap?: boolean } = {}) {
   return (target: IConstructor<T>) => {
     const paramsTypes = Reflect.getMetadata("design:paramtypes", target);
     Reflect.defineMetadata(FUNCTIONS, paramsTypes, target);
