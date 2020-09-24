@@ -25,14 +25,11 @@ export function Ioc<T>(target: IConstructor<T>): T {
   const params = paramsTypes.map((rely: any) => {
     return Ioc(rely);
   });
-  const tempInstance: T = new (target as any)(...params);
 
-  Reflect.defineMetadata(
-    INSTANCES,
-    GLOBAL_HANDLER.reduce((v, h) => h(v), tempInstance),
-    target
-  );
-  return tempInstance;
+  const tempInstance: T = new (target as any)(...params);
+  const result = GLOBAL_HANDLER.reduce((v, h) => h(v), tempInstance);
+  Reflect.defineMetadata(INSTANCES, result, target);
+  return result;
 }
 
 export function Inject() {
