@@ -34,7 +34,7 @@ export function Ioc<T>(target: IConstructor<T>): T {
   return result;
 }
 
-export function Inject() {
+export function Iocable() {
   return (target: any, key: string) => {
     const type = Reflect.getMetadata("design:type", target, key);
     target[key] = Ioc(type);
