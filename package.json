@@ -1,31 +1,31 @@
 {
-  "name": "qzx-ioc",
-  "version": "1.1.95",
-  "description": "the ioc fun",
-  "main": "index.js",
-  "dependencies": {
-    "reflect-metadata": "^0.1.12",
-    "typescript": "^4.0.2"
-  },
-  "devDependencies": {
-    "tslib": "^1.10.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "publish": "npm publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zxqian1991/qzx-ioc.git"
-  },
-  "keywords": [
-    "ioc"
-  ],
-  "author": "qianzhixiang",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zxqian1991/qzx-ioc/issues"
-  },
-  "homepage": "https://github.com/zxqian1991/qzx-ioc#readme"
+    "name": "qzx-ioc",
+    "version": "2.0.0",
+    "description": "the ioc fun",
+    "main": "index.js",
+    "dependencies": {
+        "reflect-metadata": "^0.1.12",
+        "typescript": "^4.0.2"
+    },
+    "devDependencies": {
+        "tslib": "^2.3.1"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc",
+        "publish": "npm publish"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zxqian1991/qzx-ioc.git"
+    },
+    "keywords": [
+        "ioc"
+    ],
+    "author": "qianzhixiang",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/zxqian1991/qzx-ioc/issues"
+    },
+    "homepage": "https://github.com/zxqian1991/qzx-ioc#readme"
 }
